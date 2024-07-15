@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:avaloniaApp.ViewModels"
+             xmlns:local="clr-namespace:avaloniaApp.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="avaloniaApp.Views.MainGridData"
+             x:DataType="vm:MainGridDataViewModel"             
+             >
+  <UserControl.DataContext>
+    <vm:MainGridDataViewModel/>
+  </UserControl.DataContext>
+  <Grid RowDefinitions="0.2*" ColumnDefinitions="0.3*, 1*" ShowGridLines="True">
+
+    <Popup Name="ChangeControlPopup">
+      <local:ChangeData/>
+    </Popup>
+    
+    <Button  Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Click="OpenPopup" Name="ButtonForPoput"  >Change</Button>
+    
+    <!--<Grid Grid.Row="0" Grid.Column="0" ColumnDefinitions="1*,1*" RowDefinitions="1*,1*,1*,1*" ShowGridLines="True">-->
+    <StackPanel>
+      <Panel>
+        <TextBlock Text="Take:"  FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,30,0,0"/>
+        <TextBox Height="20" Width="90" HorizontalAlignment="Right" VerticalAlignment="Top" Text="{Binding Take}" Margin="0,25,25,0" TextChanged="NumericInput_TextChanged" />
+      </Panel>
+      <Panel>
+        <TextBlock Text="Skip:" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,30,0,0"/>
+        <TextBox  Height="20" Width="90" HorizontalAlignment="Right" VerticalAlignment="Top" Text="{Binding Skip}" Margin="0,25,25,0" TextChanged="NumericInput_TextChanged" />
+      </Panel>
+    <Button  Command="{CompiledBinding GetDataButton}" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">Get Data</Button>
+    </StackPanel>
+    <!--</Grid>-->
+    
+    <DataGrid Name="DataGridv" Margin="20" ItemsSource="{Binding GridDatas}"
+          IsReadOnly="True"
+          CanUserReorderColumns="True"
+          CanUserResizeColumns="True"
+          CanUserSortColumns="False"
+          GridLinesVisibility="All"
+          BorderThickness="1" BorderBrush="Gray" Grid.Column="1" Grid.Row="1">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Title"  Binding="{Binding Title}"/>
+        <DataGridTextColumn Header="Description"  Binding="{Binding Description}"/>
+        <DataGridTextColumn Header="Status"  Binding="{Binding Status}"/>
+        <DataGridTextColumn Header="CreatedDate"  Binding="{Binding CreatedDate}"/>
+        <DataGridTextColumn Header="ModifiedDate"  Binding="{Binding ModifiedDate}"/>
+
+      </DataGrid.Columns>
+    </DataGrid>
+
+  </Grid>
+  
+</UserControl>
